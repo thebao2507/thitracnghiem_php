@@ -1,0 +1,113 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+/* phan model */
+
+.khoi {
+    position: fixed!important;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+
+.khoi-container {
+    background-color: rgb(121, 114, 114);
+    width: 450px;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgb(0 0 0 / 50%);
+    position: relative;
+    animation: modalFadeIn ease-in-out .5s;
+}
+
+.khoi-header {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding-left: 35px;
+    font-size: 26px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.khoi-body {
+    padding-left: 35px;
+    margin-bottom: 15px;
+}
+
+.khoi-body .input {
+    padding-right: 40px;
+    text-align: center;
+}
+
+.khoi-body .khoi-card-items {
+    padding-top: 14px;
+    margin-bottom: 5px;
+}
+
+.khoi-input {
+    border: 2px solid #ccc;
+    padding: 8px;
+    border-radius: 8px;
+    width: 350px;
+    height: 40px;
+}
+
+.khoi-card-items i {
+    font-size: 20px;
+    align-items: center;
+    margin-right: 4px;
+}
+
+.khoi-button {
+    padding: 6px;
+    border-radius: 8px;
+    border: 0;
+    width: 100px;
+    height: 46px;
+    font-size: 18px;
+}
+
+.khoi-button:hover {
+    cursor: pointer;
+    background-color: #333!important;
+    color: #fff;
+}
+
+.khoi-footer {
+    padding-top: 10px;
+    padding-right: 45px;
+}
+
+.link-khoi-footer {
+    padding-left: 34px;
+    text-align: center;
+}
+
+.khoi-footer a {
+    text-align: center;
+    color: #333;
+    font-weight: 600;
+}
+
+@keyframes modalFadeIn {
+    from {
+        transform: translateY(-150px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}

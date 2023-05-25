@@ -1,0 +1,279 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#dautrang {
+    height: 54px;
+    background-color: #6497b1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.dieuhuong {
+    height: 60px;
+}
+
+.dieuhuong li {
+    display: inline-block;
+}
+
+.dieuhuong>li>a {
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+.dieuhuong li a {
+    color: #fff;
+    text-decoration: none;
+    line-height: 54px;
+    box-sizing: border-box;
+    padding: 0 24px 0 24px;
+    width: 100%;
+}
+
+.dieuhuong>li>a:hover {
+    color: #000;
+    background-color: #ccc!important;
+    display: inline-block;
+}
+
+.dieuhuong li:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    transform: translateY(-46px);
+    padding-right: 12px;
+    margin-left: 800px;
+}
+
+.dieuhuong #so2 {
+    background-color: #ccc;
+}
+
+.dieuhuong #so2 a {
+    color: #000;
+}
+
+.dieuhuong li h4 {
+    transform: translateY(-4px);
+    font-weight: 500;
+}
+
+.thoat:hover {
+    background-color: #ccc!important;
+}
+
+.thoat {
+    border: 1px solid black;
+    border-radius: 50px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;
+}
+
+.wrapper {
+    width: 100%;
+    margin-top: 55px;
+}
+
+.con {
+    margin-top: 0;
+}
+
+.logo {
+    padding-top: 20px;
+    padding-left: 68px;
+    height: 60px;
+    background: #ffffff;
+    margin-bottom: 35px;
+}
+
+.menu {
+    height: 50px;
+    background: rgb(135, 206, 235);
+    width: 90%;
+    margin: auto;
+}
+
+.banner {
+    height: 250px;
+    width: 90%;
+    margin: auto;
+    padding-bottom: 30px;
+}
+
+.content {
+    padding-left: 68px;
+    height: auto;
+    background: #ffffff;
+    padding-bottom: 20px;
+}
+
+#phancuoi {
+    width: 90%;
+    height: 70px;
+    margin: auto;
+    transform: translateY(940px);
+    background: rgb(135, 206, 235);
+}
+
+#phancuoi2 {
+    width: 94.8%;
+    height: 70px;
+    transform: translateY(480px);
+    background: rgb(135, 206, 235);
+}
+
+#phancuoi3 {
+    width: 90%;
+    height: 70px;
+    margin: auto;
+    transform: translateY(1060px);
+    background: rgb(135, 206, 235);
+}
+
+footer {
+    width: 90%;
+    margin: auto;
+    height: 70px;
+    background: rgb(135, 206, 235);
+}
+
+.menu ul li {
+    list-style: none;
+    float: left;
+    line-height: 50px;
+    padding-left: 50px;
+}
+
+.menu-list li a {
+    margin-top: 2px;
+    color: #ffffff;
+    font-size: 18px;
+    text-decoration: none;
+    transition: padding 0.3s;
+}
+
+.menu-list li a:hover {
+    background: #ccc;
+    padding-top: 12.8px;
+    padding-bottom: 12.5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #181818;
+}
+
+table {
+    padding-left: 20px;
+}
+
+.text {
+    width: 200px;
+    height: 28px;
+    border: none;
+    background: #ffffff;
+    padding-left: 5px;
+    margin-top: 8px;
+}
+
+.timkiem {
+    width: 90px;
+    height: 28px;
+    background: rgb(135, 206, 235);
+    border: 0.5px solid #ffffff;
+    color: #ffffff;
+}
+
+form {
+    text-align: right;
+    margin-right: 35px;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+}
+
+.td {
+    width: 980px;
+    height: 65px;
+    line-height: 30px;
+}
+
+.content ul li {
+    list-style: none;
+}
+
+.lythuyet li::before {
+    content: "➥";
+    font-size: 16px;
+    color: rgb(49, 46, 46);
+    display: inline-block;
+    width: 16px;
+    margin-left: 2em;
+}
+
+.content ul li a {
+    color: #181818;
+    font-size: 16px;
+    text-decoration: none;
+    line-height: 45px;
+    padding-left: 50px;
+}
+
+.content a {
+    transition: padding 0.4s;
+}
+
+.content a:hover {
+    border: 1px solid #7bc043;
+    padding: 15px;
+    border-radius: 50px;
+    color: #7bc043;
+}
+
+.content li:last-child a:hover {
+    border: 1px solid #da64d4;
+    padding: 15px;
+    border-radius: 50px;
+    color: #da64d4;
+}
+
+.content li:first-child a:hover {
+    border: 1px solid #b4583c;
+    padding: 15px;
+    border-radius: 50px;
+    color: #b4583c;
+}
+
+.box-1 {
+    padding-left: 30px;
+}
+
+.box-1 h4 {
+    margin-left: 25px;
+}
+
+.box-1 ul li {
+    margin-left: 30px;
+}
+
+.box-1 li {
+    list-style-type: none;
+}
+
+a:link {
+    color: #00807a;
+    background-color: transparent;
+    text-decoration: none;
+}

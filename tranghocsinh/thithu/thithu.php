@@ -1,0 +1,225 @@
+<meta charset = "utf8">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+p {
+  text-align: center;
+  font-size: 30px;
+  margin-top: 0px;
+}
+</style>
+</head>
+<p id="dongho"></p>
+<form align="start" id = "toanbo" action="hiendapan.php" method="POST">
+<?php
+    //tạo ses này để lấy mã học sinh lưu lên data khi hs làm bài
+    $_SESSION['mahs'] = $_SESSION['mahocsinh'];
+    $conn = mysqli_connect("localhost", "root", "", "qlthithpt")
+    or die("Không kết nối được");
+    mysqli_query($conn, "set names 'utf8'");
+
+    $de = "SELECT `made` FROM `dethi` WHERE `loaide` = 'Thi thử' ORDER BY RAND () LIMIT 1"; 
+    //$kqde = mysqli_query($conn, $de);
+    $row = mysqli_fetch_array(mysqli_query($conn, $de));
+
+    $laycauhoi = "SELECT * from cauhoithi join dethi on cauhoithi.made = dethi.made
+            where dethi.made = '".$row['made']."'";
+    $kqch = mysqli_query($conn, $laycauhoi);
+
+    $cau = 1;
+    $index = 0;
+    while($row2 = mysqli_fetch_array($kqch))
+    {
+        $macauhoi = $row2['macht'];
+        
+        if($index == 0)
+        {
+            echo "<div id = '".$row2['macht']."' style = 'margin-left:182px;'>";
+        }
+        else
+        {
+            echo "<div id = '".$row2['macht']."' style='display: none; margin-left:185px;'>";
+        }
+            echo "<b style = 'color: #00008B';>Câu $cau: ".$row2['noidung']."<br> </b>";
+            
+            echo "<input type='text' name='thutu$index' value=".$row2['macht']." hidden>".
+            "<input type='text' name='made' value=".$row['made']." hidden>".
+            "<input type='text' id='mahs' value=".$_SESSION['mahs']." hidden>".
+            "<div class = 'cautraloi' style = 'font-size:17px; margin-bottom: -12px; width:650px; border-radius:20px; padding: 5px 0px 4px 3px; border: 1px solid black; margin-top: 6px;'><input style='height:20px; width:20px; vertical-align: middle; border: 1px solid black;' type='radio' value='".$row2['a']."' name='cau$index'/><b> A. </b>".$row2['a']."</div><br>".
+            "<div class = 'cautraloi' style = 'font-size:17px; margin-bottom: -12px; width:650px; border-radius:20px; padding: 5px 0px 4px 3px; border: 1px solid black; margin-top: 6px;'><input style='height:20px; width:20px; vertical-align: middle; border: 1px solid black;' type='radio' value='".$row2['b']."' name='cau$index'/><b> B. </b>".$row2['b']."</div><br>".
+            "<div class = 'cautraloi' style = 'font-size:17px; margin-bottom: -12px; width:650px; border-radius:20px; padding: 5px 0px 4px 3px; border: 1px solid black; margin-top: 6px;'><input style='height:20px; width:20px; vertical-align: middle; border: 1px solid black;' type='radio' value='".$row2['c']."' name='cau$index'/><b> C. </b>".$row2['c']."</div><br>".
+            "<div class = 'cautraloi' style = 'font-size:17px; margin-bottom: -12px; width:650px; border-radius:20px; padding: 5px 0px 4px 3px; border: 1px solid black; margin-top: 6px;'><input style='height:20px; width:20px; vertical-align: middle; border: 1px solid black;' type='radio' value='".$row2['d']."' name='cau$index'/><b> D. </b>".$row2['d']."</div><br>";
+        echo "</div>";
+            $cau = $cau + 1;
+        $index++;
+    }
+    echo "<div id = 'phantrang' style = 'text-align:center;'>";
+    for($i=1; $i<=40; $i++)
+    {   
+        if($i % 10 == 1)
+        {
+            echo "<br>";
+        }
+        echo "<input type='button' id = '".$i."' onClick='hienThi($i-1)' value = '".$i."'/>";
+    }
+    echo "</div>";
+    //cau hoi truoc va sau
+    echo "<div id=chuyen style = 'text-align:center;'>";
+    echo "<input type='button' style = 'width:80px;' onClick='last()' id = 'truoc' value = 'Trước'/>";
+    echo "<input type='button' style = 'width:70px;' onClick='next()'  id = 'sau' value = 'Sau'/>";
+    echo "</div>";
+?>   
+    <input type="submit" style = "width: 94px; margin-left:436px;" name = "danop" onclick="return xacNhan()" value="Nộp bài">    
+</form>
+
+<script>
+    let cauHoiHienTai = 0;
+    
+    function last()
+    {
+    danhdau(cauHoiHienTai);
+    //ẩn câu hỏi hiện tại
+    document.getElementById("toanbo").children[cauHoiHienTai].style.display = "none";
+    if(cauHoiHienTai == 0)
+    {
+        document.getElementById("toanbo").children[39].style.display = "block";
+        cauHoiHienTai = 39;
+    }
+    else
+    {
+        //hiển thị câu hỏi truoc do
+        document.getElementById("toanbo").children[cauHoiHienTai-1].style.display = "block";
+        cauHoiHienTai = cauHoiHienTai-1;
+    }
+    }
+
+    function next()
+    {
+    danhdau(cauHoiHienTai);
+    // ẩn câu hỏi hiện tại
+    document.getElementById("toanbo").children[cauHoiHienTai].style.display = "none";
+    if(cauHoiHienTai == 39)
+    {
+        document.getElementById("toanbo").children[0].style.display = "block";
+        cauHoiHienTai = 0;
+    }
+    else
+    {
+        //hiển thị câu hỏi truoc do
+        document.getElementById("toanbo").children[cauHoiHienTai+1].style.display = "block";
+        cauHoiHienTai = cauHoiHienTai+1;
+    }
+    }
+
+    function hienThi(cauHoi)
+    {
+    danhdau(cauHoiHienTai);
+    // ẩn câu hỏi hiện tại
+    document.getElementById("toanbo").children[cauHoiHienTai].style.display = "none";
+
+    //hiển thị câu hỏi đã chọn
+    document.getElementById("toanbo").children[cauHoi].style.display = "block";
+    cauHoiHienTai = cauHoi;
+    }
+
+    function danhdau(ten)
+    {
+        var name = "cau" + ten;
+        var checkbox = document.getElementsByName(name);
+        for (var i = 0; i < checkbox.length; i++)
+        {
+            if (checkbox[i].checked === true)
+            {
+                setColor(ten+1);
+            }
+        }
+    }
+
+    function layTL(ten)
+    { 
+        var name = "cau" + ten;
+        var checkbox = document.getElementsByName(name);
+        for (var i = 0; i < checkbox.length; i++)
+        {
+            if (checkbox[i].checked === true)
+            {
+                setColor(ten+1);
+                return checkbox[i].value;
+            }
+        }
+    }
+
+    function setColor(btn)
+    {
+        var count=1;
+        var property = document.getElementById(btn);
+        if (count == 0){
+            property.style.backgroundColor = "#FFFFFF"
+            count=1;        
+        }
+        else{
+            property.style.backgroundColor = "#6497b1"
+            count=0;
+        }
+    }
+
+    function xacNhan()
+    {
+        var soRa = $('input:radio:checked').length;
+        if(soRa < 40)
+        {
+            var result2 = confirm("Bạn chưa điền hết đáp án? Vẫn nộp bài?");
+            if (result2 == true) 
+            {
+                alert("Bạn đã nộp bài!");
+            }
+            else return false;
+        }
+        else
+        {
+            var result1 = confirm("Bạn có chắc chắn muốn nộp bài thi không?");
+            if (result1 == true) 
+            {
+                alert("Bạn đã nộp bài!");
+            }
+            else return false;
+        }
+    }
+
+    function demnguoc()
+    {
+        var today = new Date();
+        var milis = today.getTime();
+        var new_milis = milis + 3001000;
+        var d = new Date(new_milis);
+        var myData = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()+ ' ' + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+        //Đặt thời điểm đếm ngược
+        var countDownDate = new Date(myData).getTime();
+        //Cập nhật đếm ngược sau mỗi 1 giây
+        var x = setInterval(function() {
+        //Lấy ngày giờ hiện tại
+        var now = new Date().getTime();
+        //Tìm khoảng cách giữa bây giờ và ngày đếm ngược
+        var distance = countDownDate - now; 
+
+        // Tính toán thời gian cho ngày, giờ, phút và giây
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        //Xuất kết quả trong phần tử có id = "demo"
+        document.getElementById("dongho").innerHTML = "Thời gian còn lại: "+ minutes + "M " + seconds + "S ";
+            
+        // Nếu quá trình đếm ngược kết thúc
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("dongho").innerHTML = "HẾT GIỜ";
+            window.location = "hiendapan.php";
+        }
+        }, 1000);
+    }   
+
+    demnguoc();
+</script>
